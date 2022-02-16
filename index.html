@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<title>
+		Music player
+	</title>
+	<style>
+		*,
+		*::before,
+		*::after{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		html{
+			font-size: 62.5%;
+			font-family: sans-serif;
+		}
+		.main_div{
+			width: 100%;
+			height: 100vh;
+			background-color: #f6f6f6;
+			display: grid;
+			place-items: center;
+		}
+		.music_container{
+			width: 35rem;
+			height: 55rem;
+			background-color: white;
+			border-radius: 2rem;
+			box-shadow: 0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.2);
+			padding: 3rem;
+			text-align: center;
+		}
+		.music_container #title{
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			word-spacing: 5px;
+			color: #171717;
+			margin: 20px 0 5px 0;
+			font-size: 25px;
+			font-weight: 500;
+			text-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+		}
+		.music_container #artist{
+			color: #cccaca;
+			text-transform: capitalize;
+			letter-spacing: 1px;
+			font-size: 20px;
+			margin-bottom: 40px;
+			font-weight: 300;
+		}
+		.img_container{
+			width: 250px;
+			height: 250px;
+			margin: auto;
+		}
+		img{
+			box-shadow: 0 12px 30px 5px rgba(0, 0, 0, 0.4);
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+		.music_controls{
+			width: 200px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin: auto;
+			margin-top: 50px;
+		}
+		.music_controls .fa{
+			color: #111111;
+			font-size: 28px;
+			cursor: pointer;
+			filter: drop-shadow(0 12px 30px 5px rgba(0,0,0,0.4));
+		}
+		.music_controls .main_button{
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-color: #111;
+			color: #f6f6f6;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 14px;
+		}
+		.music_controls .fa:hover{
+			color: grey;
+		}
+		.music_controls .fa-play:hover{
+			background-color: #f6f6f6;
+			color: #111;
+			box-shadow: 0 10px 20px 2px rgba(0, 0, 0, 0.4);
+			transition: .3s;
+		}
+		.anime{
+			animation: rotatePlayer 3s linear infinite;
+		}
+		@keyframes rotatePlayer{
+			from{transform: rotate(0deg);}
+			to{transform: rotate(360deg);}
+		}
+	</style>
+</head>
+<body>
+		<div class="main_div">
+			<div class="music_container">
+				<h2 id="title">Mann mera</h2>
+				<h3 id="artist">raj soni</h3>
+				<div class="img_container">
+					<img src="mannmera.jpg">
+				</div>
+				<audio src="mannmera.mp3"></audio>
+
+				<!-- controls -->
+				<div class="music_controls">
+					<i class="fa fa-backward" id="Prev" title="Previous"></i>
+                    <i class="fa fa-play main_button" id="play" title="play"></i>
+                    <i class="fa fa-forward" id="Next" title="Next"></i>
+				</div>
+			</div>
+		</div>																																	     <script>
+
+			const Music = document.querySelector('audio');
+			const img = document.querySelector('img');
+			const play = document.getElementById('play');
+			
+
+
+			let isplaying = false;
+
+			// for playing function
+			const playMusic = ()=>{
+				isplaying =true;
+				Music.play();
+				play.classList.replace('fa-play', 'fa-pause');
+				img.classList.add("anime");
+			};
+
+			// for pause function
+			const pauseMusic =  ()=>{
+				isplaying =false;
+				Music.pause();
+				play.classList.replace('fa-pause' , 'fa-play');
+				img.classList.remove("anime");
+			};
+
+			play.addEventListener('click' , () =>{
+				// if(isplaying){
+				// 	pauseMusic();
+				// }
+				// else{
+				// 	playMusic();
+				// }
+
+				isplaying ? pauseMusic() : playMusic()
+			})
+
+
+		</script>																										
+</body>
+</html>
